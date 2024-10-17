@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import Register from './Components/Register';
 import EmployeeList from './Components/EmployeeList';
+import IDCardPreview from './Components/IDCardPreview';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
     <Routes>
      <Route path='/' element={<Register/>}/>
      <Route path='list' element={<EmployeeList/>}/>
-     {/* <Route path='userprofile' element={<UserProfile/>}/> */}
+     <Route path='Id' element={<IDCardPreview/>}/>
     </Routes>
     </BrowserRouter>
   );

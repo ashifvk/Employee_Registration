@@ -11,11 +11,16 @@ import {
   FormControl,
   Select,
   Box,
+  Paper,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
+import { useForm, FormProvider } from 'react-hook-form'
+
 import { DatePicker } from '@mui/x-date-pickers';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-
+import { CloudUpload } from '@mui/icons-material'
 const departments = ['HR', 'Engineering', 'Marketing', 'Sales'];
 const designations = ['Manager', 'Developer', 'Designer', 'Consultant'];
 
@@ -31,6 +36,7 @@ const Register = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -84,22 +90,18 @@ const Register = () => {
       console.error('Error:', error);
       console.error('Error:', error.response.data);
     }
+    navigate('/list');
   };
 
   return (
-    <Box
-        
+   
+    <Box className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" 
         >
-    <Container maxWidth="sm" sx={{
-            padding: '50px',
-            border: '1px solid #373636',
-            borderRadius: '10px',
-            margin: '25px auto',
-            boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
-        }}>
-      <Typography variant="h4" gutterBottom align="center">
-        Employee Registration
-      </Typography>
+      <Paper className="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg">
+    <Container>
+      <Typography variant="h4" className="text-center font-bold text-gray-900 " sx={{ marginBottom: 3 }}>
+       Registration Form
+    </Typography>
       <Box component="form" onSubmit={handleSubmit} noValidate>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -185,11 +187,13 @@ const Register = () => {
             </LocalizationProvider>
           </Grid>
           <Grid item xs={12}>
-            <Button
-              variant="contained"
-              component="label"
-              fullWidth
-            >
+          <Button
+            variant="outlined"
+            component="label"
+            fullWidth
+            startIcon={<CloudUpload />}
+            className="rounded-md border-2 border-dashed border-gray-300 p-4 text-gray-600 hover:border-gray-400 hover:bg-gray-50"
+          >
               Upload Profile Picture
               <input
                 type="file"
@@ -208,7 +212,9 @@ const Register = () => {
         </Grid>
       </Box>
     </Container>
+    </Paper>
     </Box>
+
   );
 };
 

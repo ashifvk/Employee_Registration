@@ -74,7 +74,7 @@ const EmployeeList = () => {
     formData.append('department', editEmployee.department);
     formData.append('designation', editEmployee.designation);
     formData.append('date_of_birth', editEmployee.date_of_birth); // New field
-    formData.append('contact_number', editEmployee.contact); // New field
+    formData.append('contact_number', editEmployee.contact_number); // New field
 
     if (profilePicture) {
       formData.append('profile_picture', profilePicture); // Add profile picture to FormData
@@ -96,17 +96,7 @@ const EmployeeList = () => {
 
   // Generate ID card
   const generateIdCard = (employee) => {
-    const doc = new jsPDF();
-    doc.text(`Full Name: ${employee.full_name}`, 10, 10);
-    doc.text(`Designation: ${employee.designation}`, 10, 20);
-    doc.text(`Department: ${employee.department}`, 10, 30);
-    doc.text(`Date of Birth: ${employee.date_of_birth}`, 10, 40); // Include date of birth
-    doc.text(`Contact: ${employee.contact}`, 10, 50); // Include contact
-    if (employee.profile_picture) {
-      // Adjust the following line based on how you handle images
-      // doc.addImage(employee.profile_picture, 'JPEG', 10, 60, 50, 50);
-    }
-    doc.save(`${employee.full_name}_ID_Card.pdf`);
+    navigate('/Id', { state: { employee } });
   };
 
   const handleAddEmployee = () => {
